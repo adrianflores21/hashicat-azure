@@ -111,6 +111,15 @@ resource "azurerm_virtual_machine" "catapp" {
   network_interface_ids         = [azurerm_network_interface.catapp-nic.id]
   delete_os_disk_on_termination = "true"
 
+  esource "azurerm_virtual_machine" "devops" {
+  name                = "${var.prefix}-meow"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.myresourcegroup.name
+  vm_size             = var.vm_size
+
+  network_interface_ids         = [azurerm_network_interface.catapp-nic.id]
+  delete_os_disk_on_termination = "true"
+
   storage_image_reference {
     publisher = var.image_publisher
     offer     = var.image_offer
